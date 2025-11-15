@@ -1,0 +1,25 @@
+This is the initial atom setup of ./test_runs/test_smallsys/data.lmpdata
+9 atoms 
+1 atom types 
+0 bonds 
+0 bond types 
+-7.5 7.5 xlo xhi 
+-7.5 7.5 ylo yhi 
+-1.95 1.95 zlo zhi 
+
+Atoms
+
+1	 1	 -4.8478851929113205	 -4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 1 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+2	 1	 0.0	 -4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 2 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+3	 1	 4.8478851929113205	 -4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 3 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+4	 1	 -4.8478851929113205	 0.0	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 4 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+5	 1	 0.0	 0.0	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 5 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+6	 1	 4.8478851929113205	 0.0	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 6 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+7	 1	 -4.8478851929113205	 4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 7 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+8	 1	 0.0	 4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 8 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+9	 1	 4.8478851929113205	 4.8478851929113205	 0.0	 2.8	 0.005147941820269123	 0.0	 0	 0	 0	 0.4	 9 #atom id|type|x0|y0|z0|d|rho|m|mx|my|mz|chi|trap_id
+
+PairIJ Coeffs
+
+1 1 lj/cut/dipole/cut 0.01 2.49451641079295 2.8 20
+
