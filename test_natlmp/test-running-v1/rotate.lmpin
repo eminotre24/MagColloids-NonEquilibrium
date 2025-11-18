@@ -1,0 +1,39 @@
+### ---preamble--- ###
+log ./highfreq.log
+units micro 
+atom_style hybrid dipole sphere #Modified - No bonds
+boundary p p f 
+ 
+neighbor 1.0 bin 
+neigh_modify every 1 delay 1 check yes
+pair_style hybrid lj/cut/dipole/cut 1 20
+
+### ---Create Particles and Region--- ###
+read_data ./highfreq.lmpdata
+group Atoms type 1 
+mass * 1
+
+### ---Variables--- ###
+## magnetic field
+variable Bmag atom 8.81016722408027e-05
+variable freq atom 4e-06
+variable theta atom 0.46949356878647464
+variable phi atom 0.0
+
+variable fieldx atom v_Bmag*cos(v_freq*time*2*PI+v_phi)*sin(v_theta)
+variable fieldy atom v_Bmag*sin(v_freq*time*2*PI+v_phi)*sin(v_theta)
+variable fieldz atom v_Bmag*cos(v_theta)
+
+### ---Fixes--- ###
+fix 	1 Atoms set 1 0 group all dipole v_fieldx v_fieldy v_fieldz
+fix 	2 Atoms brownian 300 738159 gamma_t 59.17065085714284 #Modified 
+
+fix     3 Atoms addforce 0 0 -0.00011264159515495175 #Weight
+fix 	6 Atoms wall/lj126 zlo -2.0 0.01 1.247258205396475  1.4 zhi 2.0 0.01 1.247258205396475  1.4  #ZWalls LJ - Modified
+
+### ---Run Commands--- ###
+timestep 	100.0 
+dump 	3 all custom 333 ./highfreq.lammpstrj id type x	 y	 z
+thermo_style 	custom step atoms
+thermo 	100  
+run 	1000000 
