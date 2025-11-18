@@ -1,0 +1,44 @@
+### ---preamble--- ###
+log ./test.log
+units micro 
+atom_style hybrid dipole sphere bond 
+boundary p p s
+
+neighbor 1.0 nsq
+pair_style lj/cut/dipole/cut 1 20 
+
+### ---Create Particles and Region--- ###
+read_data ./lol.lmpdata
+pair_coeff 1 1 0.01 2.49451641079295 2.8 20
+group Atoms type 1 
+mass * 1
+
+set group Atoms dipole 0.0 0.0 0.0001
+
+### ---Magnetic field varibales--- ###
+variable Bmag atom  8.81016722408027e-05 #manually
+variable freq atom  4e-06
+variable theta atom 0.46949356878647464
+variable phi atom 0.0
+
+variable fieldx atom v_Bmag*(cos(v_freq*time*2*PI)*sin(v_theta))
+variable fieldy atom v_Bmag*(sin(v_freq*time*2*PI)*sin(v_theta))
+variable fieldz atom v_Bmag*cos(v_theta)
+
+### ---Fixes--- ###
+fix 	1 Atoms set 1 0 group all dipole v_fieldx v_fieldy v_fieldz
+fix 	2 Atoms brownian 300 92125 gamma_t 59.17065085714284
+fix 	6 Atoms wall/lj126 zlo -2.0 0.01 1.247258205396475  1.4 zhi 2.0 0.01 1.247258205396475  1.4 units box
+#fix     7 all deform 1 x final -196 196 y final -196 196 units box 
+fix     8 all deform  1 x vel -0.00000065666666667 y vel -0.00000065666666667 units box
+
+### Bond Orientational/Hexatic Order
+compute 1 all hexorder/atom
+variable Psi6 atom sqrt(c_1[1]^2 + c_1[2]^2) 
+
+### Run Commands
+timestep 	100.0
+dump   5 all custom 2500 ./Frame_*.lammpstrj id type x y z v_Psi6
+thermo_style 	custom step atoms ke pe etotal
+thermo 	2500 
+run     50000
